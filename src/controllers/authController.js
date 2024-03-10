@@ -34,7 +34,7 @@ const register = async (req, res) => {
       },
     });
 
-    res.status(201).json({ token });
+    res.status(201).json({ newUser });
   } catch (error) {
     console.error("Error registering user:", error);
     res.status(500).json({ message: "Server error" });
@@ -80,7 +80,7 @@ const changePassword = async (req, res) => {
 
   try {
     // Fetch user from database
-    const user = await prisma.user.findUnique({ where: { userId } });
+    const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
